@@ -3,10 +3,26 @@
 //This class will allow a user to play a game of tic tac toe against a computer that will make random moves
 
 import java.io.*;
+import java.util.*;
 public class TicTacToe_Main {
+	
+	public static int[] board; //Represents the board read from left to right, top to bottom -1=X, 0=BLANK, 1=O
+	public static int[] firstWeights;
 
 	public static void main(String[] args) {
-		intro();
+		board = new int[9];
+		firstWeights = new int[9];
+		System.out.println(Arrays.toString(board));
+	    //Scanner sc = new Scanner(System.in);
+		//intro();
+	}
+	
+	public static void chooseMove() {
+		 
+	}
+	
+	public static void makeMove() {
+		System.out.println("Please choose a quadrant");
 	}
 	
 	public static void intro() {
