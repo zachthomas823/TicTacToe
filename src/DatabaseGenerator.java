@@ -30,7 +30,7 @@ public class DatabaseGenerator {
 			}	
 		}
 		try {
-			FileWriter writer = new FileWriter("TicTacToeDatabase.txt");
+			FileWriter writer = new FileWriter("TicTacToeDatabase.txt", true);
 			for(int i = 0; i < 9; i++) {
 				writer.write("hello world.");
 				writer.write(input.board[i]);

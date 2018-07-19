@@ -13,34 +13,74 @@ public class TicTacToe_Main {
 		board = new int[9];
 		firstWeights = new int[9];
 		System.out.println(Arrays.toString(board));
-	    //Scanner sc = new Scanner(System.in);
-		//intro();
+	    Scanner sc = new Scanner(System.in);
+		intro();
+		runGame(sc);
 	}
 	
-	public static void chooseMove() {
-		 
+	public static void runGame(Scanner sc) {
+		boolean xwin = false;
+		boolean owin = false;
+		int turn = -1; //Initilized as player 1's turn (1 indicates player 2's turn)
+		while(xwin == false && owin == false) {
+			if(turn == -1) {
+				System.out.println("Player One, your turn.");
+			} else {
+				System.out.println("Player Two, your turn.");
+			}
+			System.out.println("Please choose a space.");
+			boolean valid = false;
+			while(valid == false) {
+				int move = sc.nextInt();
+				if(board[move - 1] == 0) {//Check if the space is filled
+					valid = true;
+					board[move - 1] = turn;
+					turn = turn * -1;
+				} else {
+					System.out.println("Space " + move + " is already taken. Choose another.");
+				}
+				printBoard();
+				int result = checkWin();
+				if(result == -1) {
+					System.out.println("Player 1 wins!!");
+					xwin = true;
+				}else if(result == 1){
+					System.out.println("Player 2 Wins!!");
+					owin = true;
+				}
+			}
+		}
 	}
 	
-	public static void makeMove() {
-		System.out.println("Please choose a quadrant");
+	public static int checkWin() {
+		for(int i = 0; i < 3; i++) {
+			if((board[i * 3] + board[i * 3 + 1] + board[i * 3 + 2] == 3) ||
+					board[i] + board[i + 3] + board[i + 6] == 3) {
+				return 1;
+			} else if(board[i * 3] + board[i * 3 + 1] + board[i * 3 + 2] == -3 ||
+					board[i] + board[i + 3] + board[i + 6] == -3) {
+				return -1;
+			}
+		}
+		if(board[0] + board[4] + board[8]  == 3 || board[2] + board[4] + board[6] == 3) {
+			return 1;
+		} else if(board[0] + board[4] + board[8]  == -3 || board[2] + board[4] + board[6] == -3) {
+			return -1;
+		}
+		return 0;
 	}
 	
 	public static void intro() {
 		System.out.println("Hello, let's play some tic tac toe.");
 		System.out.println();
 		System.out.println("Please choose a quadrant");
-		emptyColumn();
-		System.out.println(" Q1 | Q2 | Q3");
-		System.out.println("____|____|___");
-		emptyColumn();
-		System.out.println(" Q4 | Q5 | Q6");
-		System.out.println("____|____|___");
-		emptyColumn();
-		System.out.println(" Q7 | Q8 | Q9");
-		emptyColumn();
+		printBoard();
 	}
 	
-	private static void emptyColumn() {
-		System.out.println("    |    |");
+	public static void printBoard() {
+		System.out.println(board[0] + " " + board[1] + " " + board[2]);
+		System.out.println(board[3] + " " + board[4] + " " + board[5]);
+		System.out.println(board[6] + " " + board[7] + " " + board[8]);
 	}
+	
 }
